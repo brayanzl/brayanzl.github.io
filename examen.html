@@ -1,0 +1,597 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BRAYAN ZURITA LAURA</title>
+
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+
+        }
+
+        .contenedor {
+            background: cadetblue;
+            width: 90%;
+            height: 1000%;
+            margin: auto;
+            display: flex;
+            flex-flow: row wrap;
+        }
+
+        .header {
+
+            width: 100%;
+            padding: 35px;
+
+            display: flex;
+            justify-content: space-between;
+            /*POSICIONAMIENTO DEL CONTENIDO DEL HEADER*/
+            align-items: center;
+            flex-direction: row;
+            flex-wrap: wrap;
+        }
+
+
+        .logo {
+            color: rgb(255, 255, 255);
+            font-size: 30px;
+        }
+
+
+
+        .button {
+
+            width: 50%;
+            height: 35px;
+        }
+
+        .contenido1 {
+            background: #839192;
+            padding: 10px;
+            display: flex;
+            flex-wrap: wrap;
+            width: 100%;
+            height: 190px;
+            justify-content: center;
+        }
+
+        .contenido-1 {
+            background-color: #154360;
+            width: 550px;
+            height: 160px;
+            margin: 0px auto;
+            padding: 5px;
+            
+            font-weight: bold;
+            text-align: center;
+
+        }
+
+
+
+
+
+        .slide {
+            background-color: #4581b3;
+            display: flex;
+            
+            width: 100%;
+            height: 200px;
+            justify-content: center;
+            justify-items: center;
+        }
+
+        .contentfooter {
+            /*background:#c0392b;*/
+            display: flex;
+            flex-wrap: wrap;
+            width: 100%;
+            height: 170px;
+            justify-content: center;
+        }
+
+        footer {
+            background: #D5F5E3;
+            width: 100%;
+            padding: 20px;
+            height: 500px;
+            /* Flexbox */
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+        }
+
+        .input {
+
+            width: 100%;
+        }
+
+        .caja {
+            margin: 20px;
+            padding: 20px;
+            width: 200px;
+            font-size: 10px;
+            text-align: start;
+
+        }
+
+        .medidas {
+            width: 70%;
+
+        }
+
+        .registro {
+
+
+            padding: 20px;
+            margin: auto;
+            width: 100%;
+            height: 5px;
+            text-align: center;
+
+
+        }
+
+        .registro-text {
+            margin: auto;
+            width: 20%;
+            height: 50px;
+            text-align: center;
+        }
+
+        .contenido3 {
+            display: flex;
+            flex-wrap: wrap;
+            width: 100%;
+            height: 450px;
+            justify-content: center;
+        }
+
+        .caja-contenido3 {
+            margin: 20px;
+            padding: 20px;
+            width: 200px;
+            font-size: 10px;
+            text-align: center;
+            background-color: #081d2b;
+        }
+
+        .text-contenido3 {
+
+
+            width: 200px;
+            font-size: 10px;
+            text-align: center;
+            justify-content: center;
+
+        }
+
+        .text {
+            text-align: start;
+            font-size: 15px;
+        }
+
+        .cont-1 {
+            background-color: #081d2b;
+            width: 15%;
+            height: 180px;
+        }
+
+        .contenido-text {
+
+            margin: 20px;
+            padding: 20px;
+
+            font-size: 10px;
+            font-weight: bold;
+            text-align: center;
+            background-color: #e9e9e9;
+
+        }
+
+        .caja3 {
+            width: 330px;
+            height: 440px;
+        }
+
+        .caja3contenido {
+            margin: 20px;
+            padding: 20px;
+
+            height: 200px;
+            font-size: 10px;
+
+            background-color: #287d92;
+        }
+
+        .texto {
+            text-align: center;
+
+        }
+
+        .buttonform {
+            width: 30%;
+            height: 50px;
+            border-radius: 50px;
+            background-color: #2c5e5e;
+        }
+
+
+
+        .itemCarrusel {
+
+            height: 100%;
+            
+            position: relative;
+
+
+        }
+
+
+        .flechaCarrusel {
+            height: 50%;
+            width: 100%;
+            position: absolute;
+            top: 0;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            
+        }
+
+        .image {
+            
+            
+            
+            width: 100%;
+            height: 200px;
+
+        }
+
+        .carrusel {
+
+            /*background-color: blue;*/
+            width: 100%;
+            height: 0px auto;
+            overflow: hidden;
+
+        }
+
+        .conteBoton {
+            
+            position: absolute;
+            left: 400px;            
+            top: 30px;
+            
+            width: 37%;
+            height: 50px;
+            border-radius: 50px;
+            
+            
+            
+           
+        }
+
+        i {
+            color: aliceblue;
+            font-size: 40px;
+        }
+
+        a {
+            text-decoration: none;
+        }
+        .tituloImg{
+        text-align: center;
+        
+        }
+        .centrar{
+            text-align: center;
+            
+        }
+        
+        
+    </style>
+</head>
+
+<body>
+
+
+    <div class="contenedor">
+
+        <header class="header">
+
+            <div class="logo">
+                <a href="">BRAYAN</a>
+            </div>
+
+            <nav>
+                <!-- <button class="button">INICIO</button>
+                <button class="button">INICIO</button>
+                <button class="button">INICIO</button>
+                <button class="button">INICIO</button> -->
+                <a href="" class="button">INICIO</a>
+                <a href="" class="button">NOSOTROS</a>
+                <a href="" class="button">SERVICIOS</a>
+                <a href="" class="button">CONTACTOS</a>
+            </nav>
+            <div class="search">
+                <img src="lupa.png" height="30px" >
+
+            </div>
+
+        </header>
+
+
+        <!-- CONTENIDO 1 -->
+
+        <section class="contenido1">
+            <div class="contenido-1" id="sesion">HOLA</div>
+            <div class="contenido-1">
+                <form name="convertidor" class="form-login">
+                    <h1>TIPO DE CAMBIO <br> DOLAR: 6.97</h1>
+                    <br> dolares: <input type="text" name="boliviano">
+                    
+                    <br> en bolivianos es : <input type="text" name="dolar">
+                    <br>
+                    <br><input type="button" value="CONVERTIR" onclick="calcular()">
+                </form>
+                <script type="text/javascript">
+                    function calcular(){
+                        var bol=(document.convertidor.boliviano.value)*1;
+                        var tot=bol*6.97;
+                        document.convertidor.dolar.value=tot;
+                    }
+                </script>
+            </div>
+
+        </section>
+        <!-- CONTENIDO 1 -->
+
+
+
+
+        <!-- CONTENIDO 2 -->
+        <section class="slide">
+
+            <div class="carrusel">
+                
+                <div class="itemCarrusel" id="item1">
+                    
+                    <div class="conteBoton" >
+                        <div class="tituloImg">
+                            <ul>BIENVENIDOS AL SISTEMA PRINCIPAL</ul>
+                            <br>
+                            <h1>HOLA</h1>
+                        </div>
+                        <br>
+                        <div class="centrar">
+                            <a href="#item1"><input type="submit" id="btn-submit" value="FOTO1"></a>
+                        <a href="#item2"><input type="submit" id="btn-submit" value="FOTO2"></a>
+                        <a href="#item3"><input type="submit" id="btn-submit" value="FOTO3"></a>
+                        </div>
+                        
+                    </div> 
+                    
+                    <div class="targetaCarrusel" id="targeta1"> <img class="image"
+                            src="img1.jpg">
+
+                            
+                    </div>
+                    <div class="flechaCarrusel">
+                        <a href="#item3"><i>
+                                <</i> </a>
+                        <a href="#item2"><i>></i> </a>
+
+                    </div>
+                </div>
+
+                <div class="itemCarrusel" id="item2">
+                    <div class="conteBoton" >
+                        <div class="tituloImg">
+                            <ul>BIENVENIDOS AL SISTEMA PRINCIPAL</ul>
+                            <br>
+                            <h1>CHIQUITA</h1>
+                        </div>
+                        <br>
+                        <div class="centrar">
+                            <a href="#item1"><input type="submit" id="btn-submit" value="FOTO1"></a>
+                        <a href="#item2"><input type="submit" id="btn-submit" value="FOTO2"></a>
+                        <a href="#item3"><input type="submit" id="btn-submit" value="FOTO3"></a>
+                        </div>
+                        
+                    </div> 
+                    <div class="targetaCarrusel" id="targeta2"> <img class="image"
+                            src="img2.jpg">
+                    </div>
+                    <div class="flechaCarrusel">
+                        <a href="#item1"><i>
+                                <</i> </a>
+                        <a href="#item3"><i>></i> </a>
+                    </div>
+                </div>
+
+                <div class="itemCarrusel" id="item3">
+                    <div class="conteBoton" >
+                        <div class="tituloImg">
+                            <ul>BIENVENIDOS AL SISTEMA PRINCIPAL</ul>
+                            <br>
+                            <h1>COMO TAS?</h1>
+                        </div>
+                        <br>
+                        <div class="centrar">
+                            <a href="#item1"><input type="submit" id="btn-submit" value="FOTO1"></a>
+                        <a href="#item2"><input type="submit" id="btn-submit" value="FOTO2"></a>
+                        <a href="#item3"><input type="submit" id="btn-submit" value="FOTO3"></a>
+                        </div>
+                        
+                    </div> 
+                    <div class="targetaCarrusel" id="targeta3"> <img class="image"
+                            src="img3.jpg" >
+                            
+                    </div>
+                    <div class="flechaCarrusel">
+                        <a href="#item2"><i>
+                                <</i> </a>
+                        <a href="#item1"><i>></i> </a>
+                    </div>
+                </div>
+            </div>
+            
+        </section>
+        
+
+
+        <!-- CONTENIDO 2 -->
+
+
+
+
+        <!-- CONTENIDO 3 -->
+
+        <section class="contenido3">
+
+
+            <div class="caja3">
+                <div class="caja3contenido"></div>
+                <section class="texto">
+                    <h1>TITULO</h1>
+                    <br>
+                    <ul>yo no soy tu marido ni tampoco tu hombre, un dia se de ti pero al otro no</ul>
+                    <button class="buttonform"> hola</button>
+                </section>
+            </div>
+            <div class="caja3">
+                <div class="caja3contenido"></div>
+                <section class="texto">
+                    <h1>TITULO</h1>
+                    <br>
+                    <ul>yo no soy tu marido ni tampoco tu hombre, un dia se de ti pero al otro no</ul>
+                    <button class="buttonform"> hola</button>
+                </section>
+            </div>
+            <div class="caja3">
+                <div class="caja3contenido"></div>
+                <section class="texto">
+                    <h1>TITULO</h1>
+                    <br>
+                    <ul>yo no soy tu marido ni tampoco tu hombre, un dia se de ti pero al otro no</ul>
+                    <button class="buttonform"> hola</button>
+                </section>
+
+            </div>
+
+
+        </section>
+
+        <section class="contenido3">
+
+
+
+            <!-- CONTENIDO 3 -->
+
+
+            <!-- parte4 -->
+            <footer>
+                <section class="registro">
+                    <div class="input">
+                        <h1>Ingrese su nombre de Usuario</h1>
+                        <form name="for" method="post" class="form-login">
+                            
+                            <input  type="text" class="medidas" placeholder="INGRESE SU NOMBRE" name="usuario" id="usuario">
+                        <BR></BR>
+                        <input onclick="iniciarSesion()" type="button" value="Iniciar Sesion" class="buttons">
+                        
+                        </form>
+                        <script type="text/javascript">
+                            var user =document.getElementById("usuario");
+                            
+                            var correcto = false;
+                            
+                            if(!user.equals('') ){
+                                iniciarSesion();
+                            }
+        
+                            function iniciarSesion(){
+                                if (user.value=="BRAYAN"){
+                                    correcto=true;
+                                }
+                                if (correcto){
+                                    document.getElementById("sesion").innerHTML = "BIENVENIDO " + user.value + ", GANASTE UN IPHONE 14 SOLO POR INICIAR SESION";
+                                }
+                            }
+                        </script>
+                        
+
+                    </div>
+                    
+
+
+                </section>
+
+                <section class="registro">
+                    <div>
+                        <button class="registro-text">REGISTRO</button>
+                    </div>
+                </section>
+
+                <section class="contentfooter">
+                    <div class="caja">
+                        <h1>FOOTER</h1>
+                        <br>
+                        <ul class="text">inicio</ul>
+                        <ul class="text">inicio</ul>
+                        <ul class="text">inicio</ul>
+                        <ul class="text">inicio</ul>
+
+
+
+                    </div>
+                    <div class="caja">
+                        <h1>FOOTER</h1>
+                        <br>
+                        <ul class="text">inicio</ul>
+                        <ul class="text">inicio</ul>
+                        <ul class="text">inicio</ul>
+                        <ul class="text">inicio</ul>
+                    </div>
+                    <div class="caja">
+                        <h1>FOOTER</h1>
+                        <br>
+                        <ul class="text">inicio</ul>
+                        <ul class="text">inicio</ul>
+                        <ul class="text">inicio</ul>
+                        <ul class="text">inicio</ul>
+                    </div>
+                    <div class="caja">
+                        <h1>FOOTER</h1>
+                        <br>
+                        <ul>
+                            <li class="text">inicio</li>
+                            <li class="text">sobre nosotros</li>
+                            <li class="text">servicios</li>
+                            <li class="text">contactos</li>
+                        </ul>
+                    </div>
+                </section>
+
+
+
+
+            </footer>
+            <!-- parte4 -->
+
+
+
+
+
+    </div>
+
+</body>
+
+</html>
