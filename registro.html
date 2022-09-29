@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EXAMEN FINAL</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script src="indexdb.js"></script>
+</head>
+
+<body>
+    <!-- NAVEGACION -->
+    <nav class="navbar navbar-expand-lg bg-light">
+        <div class="container-fluid">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo01"
+                aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
+                <a class="navbar-brand" href="#"> <img src="logo-servilab.png" alt=""></a>
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="finalExamen.html">Inicio</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="registro.html">Registro</a>
+                    </li>
+                    
+                    <li class="nav-item">
+                        <a class="nav-link" href="citas.html">cita</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="pago.html">Pago</a>
+                    </li>
+                </ul>
+                <form class="d-flex" role="search">
+                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                    <button class="btn btn-outline-success" type="submit">Search</button>
+                </form>
+            </div>
+        </div>
+    </nav>
+    <!-- fin NAVEGACION -->
+
+
+
+
+    
+
+
+    <!-- CUERPO -->
+
+    <div class="container">
+        <section>
+            <form class="row g-3">
+                <div class="col-md-6">
+                    <label for="inputEmail4" class="form-label">Nombres</label>
+                    <input type="text" class="form-control" id="nombre">
+                </div>
+                <div class="col-md-6">
+                    <label for="inputPassword4" class="form-label">Apellidos</label>
+                    <input type="text" class="form-control" id="apellido">
+                </div>
+                <div class="col-12">
+                    <label for="inputAddress" class="form-label">Direccion</label>
+                    <input type="text" class="form-control" id="direccion" placeholder="1234 Main St">
+                </div>
+
+                <div class="col-md-6">
+                    <label for="inputCity" class="form-label">Ciudad</label>
+                    <input type="text" class="form-control" id="ciudad">
+                </div>
+                <div class="col-md-4">
+                    <label for="inputState" class="form-label">Pais</label>
+                    <select id="pais" class="form-select">
+                        <option selected>Argentina</option>
+                        <option>Bolivia</option>
+                        <option>Chile</option>
+                        <option>Peru</option>
+
+                    </select>
+                </div>
+
+
+                
+            </form>
+            <div class="col-12">
+                <button onclick="guardar()" type="submit" class="btn btn-primary">Registro</button>
+                <button onclick="listar()" type="submit" class="btn btn-success">Lista</button>
+            </div>
+        </section>
+        <section>
+            <div >
+                <ul class="list-group" id="mostrarLista">
+                    <!-- poner aqui el idde la funcion -->
+
+                </ul>
+
+            </div>
+        </section>
+
+    </div>
+
+
+    <!-- fin CUERPO -->
+
+
+
+
+
+
+
+    <!-- pie de pagina -->
+    <!-- <section class="row">
+        <div class="col">1
+
+        </div>
+        <div class="col">2
+
+        </div>
+        <div class="col">3
+
+        </div>
+    </section> -->
+    <!-- fin pie de pagina -->
+
+
+    <script>
+        function guardar() {
+            // var _nombre=document.getElementById('nombre').value;
+            // var _apellido=document.getElementById('apellido').value;
+            // console.log(_nombre);
+            // console.log(_apellido);
+            // console.log("esta guardando")
+
+            var paciente = {
+                id: Math.floor(100000 + Math.random() * 900000),
+                nombre: document.getElementById('nombre').value,
+                apellido: document.getElementById('apellido').value,
+                direccion: document.getElementById('direccion').value,
+                ciudad: document.getElementById('ciudad').value,
+                pais: document.getElementById('pais').value,
+            }
+
+
+            var transaccion = db.transaction("paciente", "readwrite");
+            const objeto = transaccion.objectStore('paciente');
+            // insertar en el objeto
+            // const cargarInfo= objeto.add(informacion);
+            const cargarInfo = objeto.add(paciente);
+            console.log("cargar informacion", cargarInfo);
+
+        }
+
+        function listar() {
+            var lista = document.getElementById("mostrarLista");
+            console.log(lista);
+            db = dbConnection.result;
+            // lectura de tablas
+            var transaccion = db.transaction("paciente", "readonly");
+            const objeto = transaccion.objectStore('paciente');
+            console.log(objeto);
+            // iterar los elementos
+            const cursor = objeto.openCursor();
+            cursor.onsuccess = (e) => {
+                const c = e.target.result;
+                if (c) {
+                    // insertando en el html de UL, se realizo algunas concatenaciones adicionales
+                    lista.innerHTML += "<li class='list-group-item'>" + c.value['nombre'] + '-- ' + c.value['apellido'] + c.value['direccion'] + '--' + c.value['ciudad'] + '--' + c.value['pais'] + '--' + 
+                        " <button onclick='eliminar(" + c.value['id'] + ")' type='submit' class='btn btn-danger'>Eliminar</button> <button onclick='actualizar(" + c.value['id'] + ")' type='submit' class='btn btn-success'>Actualizar</button></li>"
+                    c.continue();
+                } else {
+                    console.log("no tiene datos");
+                }
+            }
+        }
+
+        function eliminar(id) {
+            console.log(id);
+            var transaccion = db.transaction("paciente", "readwrite");
+            const objeto = transaccion.objectStore('paciente');
+            // insertar en el objeto
+            const eliminado = objeto.delete(id);
+            eliminado.onsuccess = () => {
+                listar();
+            }
+            eliminado.onerror = (error) => {
+                console.log(error);
+            }
+        }
+
+
+        function actualizar(id) {
+            var transaccion = db.transaction("paciente", "readwrite");
+            const objeto = transaccion.objectStore('paciente');
+            // insertar en el objeto
+
+            
+            const actualizarInfo = objeto.put({
+                id:id,
+                nombre: document.getElementById('nombre').value,
+                apellido: document.getElementById('apellido').value,
+                direccion: document.getElementById('direccion').value,
+                ciudad: document.getElementById('ciudad').value,
+                pais: document.getElementById('pais').value,
+            });
+            if (actualizarInfo)
+                console.log("Se agrego con exito", actualizarInfo);
+        }
+    </script>
+
+</body>
+
+</html>

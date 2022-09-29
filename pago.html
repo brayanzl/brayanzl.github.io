@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EXAMEN FINAL</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script src="indexdb.js"></script>
+</head>
+
+<body>
+    <!-- NAVEGACION -->
+    <nav class="navbar navbar-expand-lg bg-light">
+        <div class="container-fluid">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo01"
+                aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
+                <a class="navbar-brand" href="#"> <img src="logo-servilab.png" alt=""></a>
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="finalExamen.html">Inicio</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="registro.html">Registro</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="citas.html">cita</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="pago.html">Pago</a>
+                    </li>
+                </ul>
+                <form class="d-flex" role="search">
+                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                    <button class="btn btn-outline-success" type="submit">Search</button>
+                </form>
+            </div>
+        </div>
+    </nav>
+    <!-- fin NAVEGACION -->
+
+
+
+
+
+
+
+    <!-- CUERPO -->
+
+    <div class="container">
+        <section>
+            <form class="row g-3">
+                <div class="col-md-6">
+                    <label for="inputEmail4" class="form-label">Description</label>
+                    <input type="text" class="form-control" id="descripcion" name="descripcion">
+                </div>
+                <div class="col-md-6">
+                    <label for="inputPassword4" class="form-label">Precio</label>
+                    <input type="text" class="form-control" id="precio" name="precio">
+                </div>
+
+                <div class="col-md-6">
+                    <label for="inputPassword4" class="form-label">Id del Paciente</label>
+                    <input type="number" class="form-control" id="id" name="id">
+                </div>
+
+
+
+            </form>
+            <br>
+            <div class="col-12">
+                <button onclick="guardar()" type="submit" class="btn btn-primary">Registro</button>
+                <button onclick="listar()" type="submit" class="btn btn-success">LISTA</button>
+            </div>
+        </section>
+        <section>
+            <div class="col-12">
+                <ul class="list-group" id="mostrarLista">
+                    <!-- poner aqui el idde la funcion -->
+
+                </ul>
+
+            </div>
+        </section>
+
+    </div>
+
+
+    <!-- fin CUERPO -->
+
+
+
+
+
+
+
+    <!-- pie de pagina -->
+    <!-- <section class="row">
+        <div class="col">1
+
+        </div>
+        <div class="col">2
+
+        </div>
+        <div class="col">3
+
+        </div>
+    </section> -->
+    <!-- fin pie de pagina -->
+
+
+    <script>
+        function guardar() {
+            // var _nombre=document.getElementById('nombre').value;
+            // var _apellido=document.getElementById('apellido').value;
+            // console.log(_nombre);
+            // console.log(_apellido);
+            // console.log("esta guardando")
+
+            var servicio = {
+                idServicio: Math.floor(100000 + Math.random() * 900000),
+                descripcion: document.getElementById('descripcion').value,
+                precio: document.getElementById('precio').value,
+                id: document.getElementById('id').value,
+            }
+
+
+            var transaccion = db.transaction("servicios", "readwrite");
+            const objeto = transaccion.objectStore('servicios');
+            // insertar en el objeto
+            // const cargarInfo= objeto.add(informacion);
+            const cargarInfo = objeto.add(servicio);
+            console.log("cargar informacion", cargarInfo);
+
+        }
+
+        function listar() {
+            var lista = document.getElementById("mostrarLista");
+            console.log(lista);
+            db = dbConnection.result;
+            // lectura de tablas
+            var transaccion = db.transaction("servicios", "readonly");
+            const objeto = transaccion.objectStore('servicios');
+            console.log(objeto);
+            // iterar los elementos
+            const cursor = objeto.openCursor();
+            cursor.onsuccess = (e) => {
+                const c = e.target.result;
+                if (c) {
+                    // insertando en el html de UL, se realizo algunas concatenaciones adicionales
+                    lista.innerHTML += "<li class='list-group-item'>" + c.value['descripcion'] + '-- ' + c.value['precio'] + c.value['id'] + '--' +
+                        " <button onclick='eliminar(" + c.value['idServicio'] + ")' type='submit' class='btn btn-danger'>Eliminar</button> <button onclick='actualizar(" + c.value['idServicio'] + ")' type='submit' class='btn btn-success'>Actualizar</button></li>"
+                    c.continue();
+                } else {
+                    console.log("no tiene datos");
+                }
+            }
+        }
+
+        function eliminar(idServicio) {
+            console.log(idServicio);
+            var transaccion = db.transaction("servicios", "readwrite");
+            const objeto = transaccion.objectStore('servicios');
+            // insertar en el objeto
+            const eliminado = objeto.delete(idServicio);
+            eliminado.onsuccess = () => {
+                listar();
+            }
+            eliminado.onerror = (error) => {
+                console.log(error);
+            }
+        }
+
+
+        function actualizar(idServicio) {
+        var transaccion = db.transaction("servicios", "readwrite");
+        const objeto = transaccion.objectStore('servicios');
+        // insertar en el objeto
+
+
+        const actualizarInfo = objeto.put({
+            idServicio: idServicio,
+            descripcion: document.getElementById('descripcion').value,
+            precio: document.getElementById('precio').value,
+            id: document.getElementById('id').value,
+        });
+        if (actualizarInfo)
+            console.log("Se agrego con exito", actualizarInfo);
+    }
+    </script>
+
+</body>
+<footer>
+    <br>
+
+</footer>
+
+</html>

@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EXAMEN final</title>
+    <!-- CSS only -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
+    <!-- JavaScript Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8"
+        crossorigin="anonymous"></script>
+    <script src="indexdb.js"></script>
+
+
+</head>
+
+<body>
+
+    <nav class="navbar navbar-expand-lg bg-light">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#"><img src="logo-servilab.png" alt=""></a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="finalExamen.html">Inicio</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="registro.html">Registro</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="citas.html">Cita</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="pago.html">Pago</a>
+                    </li>
+                </ul>
+                <form class="d-flex" role="search">
+                    <input class="form-control me-2" type="search" placeholder="Buscar" aria-label="Search">
+                    <button class="btn btn-outline-success" type="submit">Buscar</button>
+                </form>
+            </div>
+        </div>
+    </nav>
+
+
+
+    <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+                <img src="analisis de sangre.jpg" class="d-block w-100" alt="..." height="440px">
+            </div>
+            <div class="carousel-item">
+                <img src="laboratorio.jpg" class="d-block w-100" alt="..." height="440px">
+            </div>
+
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls"
+            data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls"
+            data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+        </button>
+    </div>
+
+
+
+
+
+
+
+
+
+</body>
+<script>
+    function guardar() {
+        // var _nombre=document.getElementById('nombre').value;
+        // var _apellido=document.getElementById('apellido').value;
+        // console.log(_nombre);
+        // console.log(_apellido);
+        // console.log("esta guardando")
+
+        var paciente = {
+            id: Math.floor(100000 + Math.random() * 900000),
+            nombre: document.getElementById('nombre').value,
+            apellido: document.getElementById('apellido').value,
+            direccion: document.getElementById('direccion').value,
+            ciudad: document.getElementById('ciudad').value,
+            pais: document.getElementById('pais').value,
+        }
+
+
+        var transaccion = db.transaction("paciente", "readwrite");
+        const objeto = transaccion.objectStore('paciente');
+        // insertar en el objeto
+        // const cargarInfo= objeto.add(informacion);
+        const cargarInfo = objeto.add(paciente);
+        console.log("cargar informacion", cargarInfo);
+
+    }
+
+    function listar() {
+        var lista = document.getElementById("mostrarLista");
+        console.log(lista);
+        db = dbConnection.result;
+        // lectura de tablas
+        var transaccion = db.transaction("paciente", "readonly");
+        const objeto = transaccion.objectStore('paciente');
+        console.log(objeto);
+        // iterar los elementos
+        const cursor = objeto.openCursor();
+        cursor.onsuccess = (e) => {
+            const c = e.target.result;
+            if (c) {
+                // insertando en el html de UL, se realizo algunas concatenaciones adicionales
+                lista.innerHTML += "<li class='list-group-item'>" + c.value['nombre'] + '-- ' + c.value['apellido'] + c.value['direccion'] + '--' + c.value['ciudad'] + '--' + c.value['pais'] + '--' + " </li>"
+                c.continue();
+            } else {
+                console.log("no tiene datos");
+            }
+        }
+    }
+
+
+</script>
+<!-- pie de pagina -->
+<br>
+<section class="row">
+    <div class="col">
+        <H3>Servicios</H3>
+        <ul>
+            <li>Analisis de Sangre</li>
+            <li>Analisis de Orina</li>
+            <li>VIH</li>
+            <li>Pruebas de Embarazo</li>
+        </ul>
+
+    </div>
+    <div class="col">
+
+
+
+        <H3>Redes Sociales</H3>
+        <ul>
+            <li>Whastapp</li>
+            <li>Facebook</li>
+            <li>Instagram</li>
+            
+        </ul>
+
+
+    </div>
+    <div class="col">
+        <H3>Direccion</H3>
+        <ul>
+            <li>Calle Baptista#777 entre La Paz</li>
+            
+        </ul>
+
+    </div>
+</section>
+<!-- fin pie de pagina -->
+
+
+</html>
